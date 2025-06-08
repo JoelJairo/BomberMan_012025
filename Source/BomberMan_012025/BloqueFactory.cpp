@@ -14,7 +14,7 @@ ABloque* UBloqueFactory::CrearBloque(UWorld* Mundo, ETipoBloque Tipo, const FVec
 	case ETipoBloque::BLOQUE_ACERO:
 		NuevoBloque = Mundo->SpawnActor<ABloqueAcero>(Posicion, FRotator::ZeroRotator);
 		break;
-	case ETipoBloque::BLOQUE_MADERA:
+	case ETipoBloque::BLOQUE_LADRILLO:
 		NuevoBloque = Mundo->SpawnActor<ABloqueLadrillo>(Posicion, FRotator::ZeroRotator);
 		break;
 		// Agrega otros tipos...

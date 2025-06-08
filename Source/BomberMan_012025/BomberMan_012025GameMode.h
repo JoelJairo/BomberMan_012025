@@ -13,6 +13,8 @@ class ABomberMan_012025GameMode : public AGameModeBase
 
 public:
 	ABomberMan_012025GameMode();
+	// begin play override to initialize the game mode
+	virtual void BeginPlay() override;
 };
 
 

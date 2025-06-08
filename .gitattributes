@@ -1,8 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
-Content/Geometry/** filter=lfs diff=lfs merge=lfs -text
-Content/Mannequin/** filter=lfs diff=lfs merge=lfs -text
-Content/ThirdPerson/** filter=lfs diff=lfs merge=lfs -text
-Content/StarterContent/** filter=lfs diff=lfs merge=lfs -text
 
 
