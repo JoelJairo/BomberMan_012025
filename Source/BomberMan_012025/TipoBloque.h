@@ -9,8 +9,10 @@
 UENUM(BlueprintType)
 enum class ETipoBloque : uint8
 {
+	
 	BLOQUE_ACERO     UMETA(DisplayName = "Acero"),
 	BLOQUE_LADRILLO  UMETA(DisplayName = "Ladrillo"),
+	Ninguno			UMETA(DisplayName = "Ninguno"),
 	/*BLOQUE_MADERA    UMETA(DisplayName = "Madera"),
 	BLOQUE_CONCRETO  UMETA(DisplayName = "Concreto"),
 	BLOQUE_DINAMICO  UMETA(DisplayName = "Dinamico"),*/

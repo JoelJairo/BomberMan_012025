@@ -10,6 +10,7 @@ ABloqueLadrillo::ABloqueLadrillo()
     if (MaterialOriginalFinder.Succeeded())
     {
         MaterialOriginal = MaterialOriginalFinder.Object;
+		Malla->SetMaterial(0, MaterialOriginal);
 	}
 
 	//  asignar el material dañado
@@ -42,7 +43,7 @@ void ABloqueLadrillo::BeginPlay()
     
     // Prueba de comportamiento individual y grupal
     //ComportamientoIndividual();
-    ComportamientoGrupo();
+    // ComportamientoGrupo();
 }
 
 void ABloqueLadrillo::ComportamientoIndividual()

@@ -67,5 +67,20 @@ void ABomberMan_012025GameMode::BeginPlay()
 	{
 		Director->SetBuilder(BuilderInterno);
 		Director->ConstruirLaberinto(Mundo, Filas, Columnas, Espaciado);
+
+		// Llama a DestruirGrupoEspecial después de 2 segundos para probar
+		FTimerHandle TimerHandle;
+		GetWorld()->GetTimerManager().SetTimer(
+			TimerHandle,
+			[this, BuilderInterno]()
+			{
+				if (BuilderInterno)
+				{
+					BuilderInterno->DestruirGrupoEspecial();
+				}
+			},
+			2.0f,
+			false
+		);
 	}
 }
