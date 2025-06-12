@@ -49,6 +49,7 @@ void ABomberMan_012025GameMode::BeginPlay()
 	int32 Columnas = 10;
 	float Espaciado = 200.0f;
 
+	// Uso del patrón Facade para construir el laberinto usando el Director y los Builders
 	UDirectorLaberinto* Director = NewObject<UDirectorLaberinto>(this);
 	if (!Director) return;
 
