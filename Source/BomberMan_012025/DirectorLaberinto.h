@@ -2,9 +2,11 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "IBuilderLaberinto.h"
+#include <functional>
 #include "DirectorLaberinto.generated.h"
 
-class IIBloqueBuilder;
+class IBuilderLaberinto;
 
 /**
  * Director que construye el laberinto usando un Builder
@@ -15,5 +17,10 @@ class BOMBERMAN_012025_API UDirectorLaberinto : public UObject
     GENERATED_BODY()
 
 public:
-    void ConstruirLaberinto(UWorld* Mundo, TScriptInterface<IIBloqueBuilder> Builder, int32 Filas, int32 Columnas, float Espaciado);
+    void SetBuilder(TScriptInterface<IBuilderLaberinto> InBuilder);
+
+    void ConstruirLaberinto(UWorld* Mundo, int32 Filas, int32 Columnas, float Espaciado);
+
+private:
+    TScriptInterface<IBuilderLaberinto> Builder;
 };
