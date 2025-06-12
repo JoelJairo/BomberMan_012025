@@ -13,7 +13,12 @@ ABloque::ABloque()
 	}
 }
 
-
+ABloque* ABloque::Clonar(UWorld* Mundo, const FVector& Posicion, int32 ID)
+{
+	ABloque* NuevoBloque = Mundo->SpawnActor<ABloque>(GetClass(), Posicion, FRotator::ZeroRotator);
+	// Copia propiedades necesarias aquí si aplica
+	return NuevoBloque;
+}
 
 void ABloque::ComportamientoIndividual()
 {

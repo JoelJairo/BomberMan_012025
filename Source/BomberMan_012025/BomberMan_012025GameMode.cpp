@@ -6,6 +6,11 @@
 #include "BuilderLaberintoExterno.h"
 #include "BuilderLaberintoInterno.h"
 #include "DirectorLaberinto.h"
+#include "BloqueFactory.h"
+#include "BloqueLadrillo.h"
+#include "BloqueAcero.h"
+#include "TipoBloque.h"
+#include "Engine/World.h"
 
 ABomberMan_012025GameMode::ABomberMan_012025GameMode()
 {
@@ -22,24 +27,44 @@ ABomberMan_012025GameMode::ABomberMan_012025GameMode()
 
 void ABomberMan_012025GameMode::BeginPlay()
 {
-    Super::BeginPlay();
+	Super::BeginPlay();
 
-    UWorld* Mundo = GetWorld();
-    if (!Mundo) return;
+	UWorld* Mundo = GetWorld();
+	if (!Mundo) return;
 
-    int32 Filas = 10;
-    int32 Columnas = 10;
-    float Espaciado = 200.0f;
+	// Spawn prototype blocks only if not already present
+	ABloqueLadrillo* PrototipoLadrillo = Mundo->SpawnActor<ABloqueLadrillo>();
+	if (PrototipoLadrillo)
+	{
+		UBloqueFactory::RegistrarPrototipo(ETipoBloque::BLOQUE_LADRILLO, PrototipoLadrillo);
+	}
 
-    UDirectorLaberinto* Director = NewObject<UDirectorLaberinto>();
+	ABloqueAcero* PrototipoAcero = Mundo->SpawnActor<ABloqueAcero>();
+	if (PrototipoAcero)
+	{
+		UBloqueFactory::RegistrarPrototipo(ETipoBloque::BLOQUE_ACERO, PrototipoAcero);
+	}
 
-    // Construir bordes del laberinto
-    UBuilderLaberintoExterno* BuilderExterno = NewObject<UBuilderLaberintoExterno>();
-    Director->SetBuilder(BuilderExterno);
-    Director->ConstruirLaberinto(Mundo, Filas, Columnas, Espaciado);
+	int32 Filas = 10;
+	int32 Columnas = 10;
+	float Espaciado = 200.0f;
 
-    // Construir interior del laberinto
-    UBuilderLaberintoInterno* BuilderInterno = NewObject<UBuilderLaberintoInterno>();
-    Director->SetBuilder(BuilderInterno);
-    Director->ConstruirLaberinto(Mundo, Filas, Columnas, Espaciado);
+	UDirectorLaberinto* Director = NewObject<UDirectorLaberinto>(this);
+	if (!Director) return;
+
+	// Construir bordes del laberinto
+	UBuilderLaberintoExterno* BuilderExterno = NewObject<UBuilderLaberintoExterno>(this);
+	if (BuilderExterno)
+	{
+		Director->SetBuilder(BuilderExterno);
+		Director->ConstruirLaberinto(Mundo, Filas, Columnas, Espaciado);
+	}
+
+	// Construir interior del laberinto
+	UBuilderLaberintoInterno* BuilderInterno = NewObject<UBuilderLaberintoInterno>(this);
+	if (BuilderInterno)
+	{
+		Director->SetBuilder(BuilderInterno);
+		Director->ConstruirLaberinto(Mundo, Filas, Columnas, Espaciado);
+	}
 }

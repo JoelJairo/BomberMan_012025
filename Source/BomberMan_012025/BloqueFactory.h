@@ -13,7 +13,17 @@ class BOMBERMAN_012025_API UBloqueFactory : public UObject
 {
 	GENERATED_BODY()
 
+private:
+	static TMap<ETipoBloque, ABloque*> Prototipos;
+
 public:
+	/**
+	 * Registra un prototipo de bloque para un tipo específico.
+	 * @param Tipo Tipo de bloque.
+	 * @param Prototipo Instancia del bloque que servirá como prototipo.
+	 */
+	static void RegistrarPrototipo(ETipoBloque Tipo, ABloque* Prototipo);
+
 	/**
 	 * Crea una instancia de bloque basado en el tipo especificado.
 	 * @param Mundo El mundo actual.

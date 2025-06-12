@@ -36,4 +36,7 @@ public:
 	/** Comportamiento en grupo del bloque */
 	UFUNCTION(BlueprintCallable, Category = "Bloque")
 	virtual void ComportamientoGrupo();
+
+	/** Clona el bloque en una posición específica */
+	virtual ABloque* Clonar(UWorld* Mundo, const FVector& Posicion, int32 ID);
 };

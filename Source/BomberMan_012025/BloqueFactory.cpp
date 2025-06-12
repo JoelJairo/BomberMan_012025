@@ -3,30 +3,19 @@
 #include "BloqueLadrillo.h"
 // Incluye las demás clases específicas
 
+TMap<ETipoBloque, ABloque*> UBloqueFactory::Prototipos;
+
+void UBloqueFactory::RegistrarPrototipo(ETipoBloque Tipo, ABloque* Prototipo)
+{
+    Prototipos.Add(Tipo, Prototipo);
+}
+
 ABloque* UBloqueFactory::CrearBloque(UWorld* Mundo, ETipoBloque Tipo, const FVector& Posicion, int32 ID)
 {
-	if (!Mundo) return nullptr;
-
-	ABloque* NuevoBloque = nullptr;
-
-	switch (Tipo)
-	{
-	case ETipoBloque::BLOQUE_ACERO:
-		NuevoBloque = Mundo->SpawnActor<ABloqueAcero>(Posicion, FRotator::ZeroRotator);
-		break;
-	case ETipoBloque::BLOQUE_LADRILLO:
-		NuevoBloque = Mundo->SpawnActor<ABloqueLadrillo>(Posicion, FRotator::ZeroRotator);
-		break;
-		// Agrega otros tipos...
-	default:
-		break;
-	}
-
-	if (NuevoBloque)
-	{
-		// Aquí podrías cargar dinámicamente mallas/materiales desde Content
-		// y aplicar InicializarBloque(Malla, Material);
-	}
-
-	return NuevoBloque;
+    if (Prototipos.Contains(Tipo))
+    {
+        return Prototipos[Tipo]->Clonar(Mundo, Posicion, ID);
+    }
+    // Fallback: crear desde cero si no hay prototipo
+    return nullptr;
 }
